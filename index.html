@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All ITI Trades – MCQ Practice</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg,#3f51b5,#2196f3);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    header h1 {
+      font-size: 20px;
+    }
+
+    /* Hamburger */
+    .menu-icon {
+      font-size: 26px;
+      cursor: pointer;
+      display: none;
+      margin-right:10px;
+    }
+
+    /* Nav links (desktop) */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    nav a:hover {color: #ffeb3b;}
+
+    /* Language Selector (full screen only) */
+    .nav-links select {
+      color: #333;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 6px 14px;
+      font-size: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-links select:hover {
+      border-color:#2196f3;
+      box-shadow:0 0 6px rgba(33,150,243,0.4);
+    }
+
+    /* Sidebar (mobile) */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0; left: 0;
+      background: rgba(0,0,0,0.85);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+    .sidebar a, .sidebar select {
+      display:block;
+      padding:12px 20px;
+      text-decoration:none;
+      font-size:18px;
+      color:white;
+      border-bottom:1px solid rgba(255,255,255,0.2);
+    }
+    .sidebar a:hover {background:#2196f3;}
+    .sidebar select {
+      width: calc(100% - 40px);
+      margin: 10px 20px;
+      color:#000;
+    }
+    .sidebar .closebtn {
+      position:absolute;
+      top:15px;right:25px;
+      font-size:30px;
+      color:white;
+      cursor:pointer;
+    }
+
+    /* Search bar (below header) */
+    .search-bar {
+      background:#fff;
+      padding:12px 20px;
+      border-bottom:1px solid #ddd;
+      text-align:center;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+    }
+    .search-bar input {
+      width: 35%; /* full screen par chhota */
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #bbb;
+      transition:0.3s;
+    }
+    .search-bar input:focus {
+      outline:none;
+      border-color:#2196f3;
+      box-shadow:0 0 5px rgba(33,150,243,0.4);
+    }
+    .search-bar button {
+      background:#2196f3;
+      border:none;
+      color:white;
+      padding:8px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      transition:0.3s;
+      font-size:16px;
+    }
+    .search-bar button:hover {
+      background:#1976d2;
+    }
+
+    /* Container */
+    .container {
+      max-width:1000px;
+      margin:30px auto;
+      padding:20px;
+    }
+    .trade-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+    }
+    .trade-box {
+      background:white;
+      border-radius:12px;
+      padding:20px;
+      text-align:center;
+      font-weight:bold;
+      border:2px solid transparent;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      transition:all 0.3s ease;
+    }
+    .trade-box a {
+      text-decoration:none;
+      color:#1a237e;
+      font-size:18px;
+      display:block;
+    }
+    .trade-box:hover {
+      border-color:#2196f3;
+      transform:translateY(-5px);
+      box-shadow:0 8px 18px rgba(0,0,0,0.15);
+      background:#e3f2fd;
+    }
+
+    /* Footer */
+    footer {
+      text-align:center;
+      padding:20px;
+      font-size:14px;
+      color:#666;
+      background:#fafafa;
+      border-top:1px solid #ddd;
+      margin-top:40px;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      nav {display:none;}
+      .menu-icon {display:block;color:white;}
+      header {
+        justify-content:flex-start;
+      }
+      header h1 {
+        font-size:16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="menu-icon" onclick="openNav()">☰</span>
+  <h1>All ITI Trades – MCQ Practice Portal</h1>
+  <nav class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">NIMI Mock Test</a>
+    <a href="#">CBT Exam</a>
+    <a href="#">Question Bank</a>
+    <a href="#">Books PDF</a>
+    <a href="#">ITI Result</a>
+    <a href="#">Contact</a>
+    <select id="languageSelect">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="ta">தமிழ்</option>
+      <option value="bn">বাংলা</option>
+      <option value="te">తెలుగు</option>
+      <option value="mr">मराठी</option>
+      <option value="gu">ગુજરાતી</option>
+      <option value="pa">ਪੰਜਾਬੀ</option>
+      <option value="ml">മലയാളം</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="or">ଓଡ଼ିଆ</option>
+      <option value="ur">اردو</option>
+    </select>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+  <span class="closebtn" onclick="closeNav()">×</span>
+  <a href="file:///C:/Users/GAMING/Desktop/2.0/index.html">Home</a>
+  <a href="#">NIMI Mock Test</a>
+  <a href="#">CBT Exam</a>
+  <a href="#">Question Bank</a>
+  <a href="#">Books PDF</a>
+  <a href="#">ITI Result</a>
+  <a href="#">Contact</a>
+  <select id="languageSelectMobile">
+    <option value="en">English</option>
+    <option value="hi">हिंदी</option>
+    <option value="ta">தமிழ்</option>
+    <option value="bn">বাংলা</option>
+    <option value="te">తెలుగు</option>
+    <option value="mr">मराठी</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="pa">ਪੰਜਾਬੀ</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="ur">اردو</option>
+  </select>
+</div>
+
+<!-- Search -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search Trade...">
+  <button onclick="searchTrade()">🔍</button>
+</div>
+
+<!-- Content -->
+<div class="container" id="contentArea">
+  <div class="trade-grid" id="tradeGrid">
+    <div class="trade-box"><a href="copa/index.html" onclick="loadPage(event,'copa/index.html')">COPA</a></div>
+    <div class="trade-box"><a href="electrician/index.html" onclick="loadPage(event,'electrician/index.html')">Electrician</a></div>
+    <div class="trade-box"><a href="fitter/index.html" onclick="loadPage(event,'fitter/index.html')">Fitter</a></div>
+    <div class="trade-box"><a href="welder/index.html" onclick="loadPage(event,'welder/index.html')">Welder</a></div>
+    <div class="trade-box"><a href="wireman/index.html" onclick="loadPage(event,'wireman/index.html')">Wireman</a></div>
+    <div class="trade-box"><a href="plumber/index.html" onclick="loadPage(event,'plumber/index.html')">Plumber</a></div>
+    <div class="trade-box"><a href="diesel/index.html" onclick="loadPage(event,'diesel/index.html')">Diesel Mechanic</a></div>
+    <div class="trade-box"><a href="draftsman/index.html" onclick="loadPage(event,'draftsman/index.html')">Draftsman (Civil)</a></div>
+    <div class="trade-box"><a href="electronics/index.html" onclick="loadPage(event,'electronics/index.html')">Electronics Mechanic</a></div>
+    <div class="trade-box"><a href="refrigeration/index.html" onclick="loadPage(event,'refrigeration/index.html')">Refrigeration & AC</a></div>
+    <div class="trade-box"><a href="turner/index.html" onclick="loadPage(event,'turner/index.html')">Turner</a></div>
+    <div class="trade-box"><a href="machinist/index.html" onclick="loadPage(event,'machinist/index.html')">Machinist</a></div>
+    <div class="trade-box"><a href="carpenter/index.html" onclick="loadPage(event,'carpenter/index.html')">Carpenter</a></div>
+    <div class="trade-box"><a href="painter/index.html" onclick="loadPage(event,'painter/index.html')">Painter</a></div>
+    <div class="trade-box"><a href="toolmaker/index.html" onclick="loadPage(event,'toolmaker/index.html')">Tool & Die Maker</a></div>
+    <div class="trade-box"><a href="motor/index.html" onclick="loadPage(event,'motor/index.html')">Motor Mechanic</a></div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 ITI MCQ Practice. All rights reserved.
+</footer>
+
+<script>
+  // Sidebar control
+  function openNav(){document.getElementById("mySidebar").style.width="250px";}
+  function closeNav(){document.getElementById("mySidebar").style.width="0";}
+
+  // Search functionality
+  function searchTrade(){
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let boxes = document.querySelectorAll(".trade-box");
+    boxes.forEach(b=>{
+      let text = b.innerText.toLowerCase();
+      b.style.display = text.includes(input) ? "block" : "none";
+    });
+  }
+
+  // Option 2: load content without leaving page
+  function loadPage(event, url){
+    event.preventDefault();
+    fetch(url)
+      .then(res=>res.text())
+      .then(html=>{
+        document.getElementById("contentArea").innerHTML = html;
+      })
+      .catch(err=>console.error("Error loading page:",err));
+  }
+</script>
+
+</body>
+</html>
